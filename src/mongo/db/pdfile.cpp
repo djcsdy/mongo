@@ -358,11 +358,8 @@ namespace mongo {
     /*---------------------------------------------------------------------*/
 
     int MongoDataFile::maxSize() {
-        if ( sizeof( int* ) == 4 ) {
-            return 512 * 1024 * 1024;
-        }
-        else if ( cmdLine.smallfiles ) {
-            return 0x7ff00000 >> 2;
+        if ( sizeof( int* ) == 4 || cmdLine.smallfiles ) {
+            return 32 * 1024 * 1024;
         }
         else {
             return 0x7ff00000;
