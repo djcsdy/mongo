@@ -603,8 +603,11 @@ elif "win32" == os.sys.platform:
     #  An integer type is converted to a smaller integer type.
     env.Append( CPPFLAGS=" /wd4355 /wd4800 /wd4267 /wd4244 " )
     
+    env.Append( CPPDEFINES=["_CONSOLE","_CRT_SECURE_NO_WARNINGS"] )
+    
     # PSAPI_VERSION relates to process api dll Psapi.dll.
-    env.Append( CPPDEFINES=["_CONSOLE","_CRT_SECURE_NO_WARNINGS","PSAPI_VERSION=1" ] )
+    # (Version 2 is introduced in Windows 7/Windows Server 2008).
+    env.Append( CPPDEFINES={"PSAPI_VERSION": "1"} )
 
     # this would be for pre-compiled headers, could play with it later  
     #env.Append( CPPFLAGS=' /Yu"pch.h" ' ) 
